@@ -1,0 +1,117 @@
+// Define the base Animal prototype
+Animal := Object clone do(
+    name ::= nil
+    init := method(name,
+        @name = name
+    )
+    sleep := method(
+        writeln(clock.hour .. ": " .. @name .. " the " .. type .. " sleeps.")
+    )
+)
+
+// Define the Feline prototype inheriting from Animal
+Feline := Animal clone do(
+    type ::= "Cat"
+    eat := method(
+        writeln(clock.hour .. ": " .. @name .. " the " .. type .. " eats quietly.")
+    )
+    play := method(
+        writeln(clock.hour .. ": " .. @name .. " the " .. type .. " plays and chases their tail.")
+    )
+    makeNoise := method(
+        writeln(clock.hour .. ": " .. @name .. " the " .. type .. " meows.")
+    )
+)
+
+// Define the Canine prototype inheriting from Animal
+Canine := Animal clone do(
+    type ::= "Dog"
+    eat := method(
+        writeln(clock.hour .. ": " .. @name .. " the " .. type .. " eats loudly.")
+    )
+    play := method(
+        writeln(clock.hour .. ": " .. @name .. " the " .. type .. " plays and fetches a ball.")
+    )
+    makeNoise := method(
+        writeln(clock.hour .. ": " .. @name .. " the " .. type .. " barks.")
+    )
+)
+
+// Create named Cat and Dog instances
+cats := list(
+    Feline clone init("Cookie"),
+    Feline clone init("Cleo"),
+    Feline clone init("Casper")
+)
+
+dogs := list(
+    Canine clone init("Rover"),
+    Canine clone init("Buddy"),
+    Canine clone init("Max")
+)
+
+// Define the Staff prototype
+Staff := Object clone do(
+    name ::= nil
+    init := method(name,
+        @name = name
+    )
+    arrive := method(
+        writeln(clock.hour .. ": " .. @name .. " arrives at the store.")
+    )
+    lunch := method(
+        writeln(clock.hour .. ": " .. @name .. " takes a lunch break.")
+    )
+    leave := method(
+        writeln(clock.hour .. ": " .. @name .. " leaves the store.")
+    )
+)
+
+// Define the Manager prototype inheriting from Staff
+Manager := Staff clone do(
+    openStore := method(
+        writeln(clock.hour .. ": " .. @name .. " opens the store.")
+        cats foreach(_.makeNoise)
+        dogs foreach(_.makeNoise)
+    )
+    closeStore := method(
+        writeln(clock.hour .. ": " .. @name .. " closes the store.")
+        cats foreach(_.sleep)
+        dogs foreach(_.sleep)
+    )
+)
+
+// Define the Clerk prototype inheriting from Staff
+Clerk := Staff clone do(
+    feedAnimals := method(
+        writeln(clock.hour .. ": " .. @name .. " feeds the animals.")
+        cats foreach(_.eat)
+        dogs foreach(_.eat)
+    )
+    playAnimals := method(
+        writeln(clock.hour .. ": " .. @name .. " plays with the animals.")
+        cats foreach(_.play)
+        dogs foreach(_.play)
+    )
+    sellAnimals := method(
+        writeln(clock.hour .. ": " .. @name .. " sells some of the animals.")
+        // Implement animal selling logic
+    )
+)
+
+// Define the Clock and its behavior
+Clock := Object clone do(
+    day ::= 1
+    hour ::= 0
+    announceHour := method(
+        // Define the schedule and reactions for each hour
+    )
+)
+
+// Create instances of Manager and Clerk
+manager := Manager clone init("Morgan the Manager")
+clerk := Clerk clone init("Clem the Clerk")
+
+// Simulation of the store operation over three days
+for(day, 1, 3) do(
+   
